@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  budibase:
+    restart: unless-stopped
+    image: budibase/budibase:latest
+    ports:
+      - "10000:80"
+    environment:
+      JWT_SECRET: "budibase-jwt-secret-key-2024"
+      MINIO_ACCESS_KEY: "budibase-minio-access"
+      MINIO_SECRET_KEY: "budibase-minio-secret-2024"
+      REDIS_PASSWORD: "budibase-redis-password-2024"
+      COUCHDB_USER: "budibase"
+      COUCHDB_PASSWORD: "budibase-couch-password-2024"
+      INTERNAL_API_KEY: "budibase-internal-api-key-2024"
+    volumes:
+      - budibase_data:/data
+
+volumes:
+  budibase_data:
+    driver: local

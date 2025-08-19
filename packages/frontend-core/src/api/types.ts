@@ -35,6 +35,7 @@ import { UserEndpoints } from "./user"
 import { ViewEndpoints } from "./views"
 import { ViewV2Endpoints } from "./viewsV2"
 import { AgentEndpoints } from "./agents"
+import { BudiGenieEndpoints } from "./budi-genie"
 import { NavigationEndpoints } from "./navigation"
 import { WorkspaceAppEndpoints } from "./workspaceApps"
 import { ResourceEndpoints } from "./resource"
@@ -111,6 +112,7 @@ export type APIError = {
 export type APIClient = BaseAPIClient &
   AIEndpoints &
   AgentEndpoints &
+  BudiGenieEndpoints &
   AnalyticsEndpoints &
   AppEndpoints &
   AttachmentEndpoints &

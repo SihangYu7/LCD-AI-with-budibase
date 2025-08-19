@@ -39,6 +39,9 @@ builderAdminRoutes
   .get("/api/agent/toolsource", ai.fetchToolSources)
   .post("/api/ai/cron", ai.generateCronExpression)
   .post("/api/ai/js", ai.generateJs)
+  // New Budi-Genie endpoints - Enhanced AI interface
+  .post("/api/budi-genie/chat", ai.budiGenieChat)
+  .post("/api/budi-genie/stream", ai.budiGenieStream)
 
 licensedRoutes
   .post("/api/ai/chat", ai.chatCompletion)
