@@ -7,6 +7,7 @@
 ## 核心原则 (Linus 的"好品味")
 
 ### 1. 数据结构优先
+
 ```text
 "Bad programmers worry about the code. Good programmers worry about data structures."
 
@@ -17,6 +18,7 @@
 ```
 
 ### 2. 消除特殊情况
+
 ```text
 原来的问题：
 - agents.ts 中大量 if/else 分支处理不同工具类型
@@ -30,6 +32,7 @@
 ```
 
 ### 3. 简洁执念
+
 ```text
 "If you need more than 3 levels of nesting, you're screwed."
 
@@ -44,15 +47,18 @@
 ### 三种交互模式
 
 #### 1. **Chat Mode** - 自由对话
+
 - 自然语言交互
 - 上下文感知回复
 - 实时流式响应
 - 集成现有 AI 工具链
 
 #### 2. **Wizard Mode** - 半结构化引导
+
 - **Table Designer**: 4步表设计流程
+
   - Step 1: 表名定义
-  - Step 2: 字段配置  
+  - Step 2: 字段配置
   - Step 3: 关系设置
   - Step 4: 验证规则
 
@@ -61,6 +67,7 @@
 - **UI Builder**: 界面设计助手
 
 #### 3. **Recommendations Mode** - AI 智能推荐
+
 - 缺失 CRUD 检测
 - 表关系分析
 - 自动化建议
@@ -69,26 +76,29 @@
 ### 核心技术特性
 
 #### 1. **上下文感知推荐引擎**
+
 ```typescript
 // 简单模式匹配，不需要复杂 AI
 const patterns = {
   user: [
     { name: "email", type: "email", confidence: 0.95 },
-    { name: "firstName", type: "text", confidence: 0.9 }
+    { name: "firstName", type: "text", confidence: 0.9 },
   ],
   product: [
     { name: "price", type: "number", confidence: 0.9 },
-    { name: "description", type: "longform", confidence: 0.8 }
-  ]
+    { name: "description", type: "longform", confidence: 0.8 },
+  ],
 }
 ```
 
 #### 2. **零破坏性集成**
+
 - 保持现有 API 完全兼容
 - 新端点：`/api/budi-genie/chat` 和 `/api/budi-genie/stream`
 - 独立的前端组件，不影响现有界面
 
 #### 3. **实用主义实现**
+
 - 基于规则的推荐系统（不是过度复杂的 ML）
 - 简单状态机处理向导流程
 - 直接的数据库查询分析
@@ -101,11 +111,16 @@ const patterns = {
 class BudiGenieService {
   // 核心原则：每个方法只做一件事
   async generateRecommendations(context): Promise<AIRecommendation[]>
-  async processSemiStructured(type, data, input): Promise<SemiStructuredInteraction>
+  async processSemiStructured(
+    type,
+    data,
+    input
+  ): Promise<SemiStructuredInteraction>
 }
 ```
 
 **关键设计决策：**
+
 - 使用简单类结构，不是复杂的继承层次
 - 每个向导类型用独立方法处理，避免巨大的 switch 语句
 - 推荐基于现有应用结构分析，不需要外部 AI 服务
@@ -120,6 +135,7 @@ class BudiGenieService {
 ```
 
 **UI 设计原则：**
+
 - 熟悉的三列布局（类似现有 agent 界面）
 - 即时反馈和响应式交互
 - 渐进式披露：复杂功能逐步展现
@@ -136,18 +152,20 @@ export interface BudiGenieEndpoints {
 ## 优势对比
 
 ### vs 现有 Agent 系统
-| 特性 | 现有系统 | Budi-Genie |
-|------|----------|------------|
-| 交互方式 | 纯聊天 | 聊天 + 向导 + 推荐 |
-| 上下文感知 | 有限 | 应用结构分析 |
-| 开发引导 | 无 | 结构化向导 |
-| 智能推荐 | 无 | 基于最佳实践 |
+
+| 特性       | 现有系统 | Budi-Genie         |
+| ---------- | -------- | ------------------ |
+| 交互方式   | 纯聊天   | 聊天 + 向导 + 推荐 |
+| 上下文感知 | 有限     | 应用结构分析       |
+| 开发引导   | 无       | 结构化向导         |
+| 智能推荐   | 无       | 基于最佳实践       |
 
 ### vs 过度设计的解决方案
+
 ```text
 ❌ 不做：
 - 复杂的机器学习推荐系统
-- 过度抽象的插件架构  
+- 过度抽象的插件架构
 - 微服务拆分
 
 ✅ 要做：
@@ -159,21 +177,25 @@ export interface BudiGenieEndpoints {
 ## 实施路径
 
 ### Phase 1: 核心框架 (2-3 天)
+
 1. 后端 API 端点实现
 2. 基础前端界面
 3. 基本聊天功能
 
 ### Phase 2: 推荐引擎 (3-4 天)
+
 1. 应用结构分析
 2. CRUD 缺失检测
 3. 关系分析推荐
 
 ### Phase 3: 向导系统 (4-5 天)
+
 1. Table Designer 向导
 2. Form Builder 向导
 3. 其他向导集成
 
 ### Phase 4: 优化整合 (2-3 天)
+
 1. 性能优化
 2. 界面打磨
 3. 错误处理完善
@@ -181,10 +203,12 @@ export interface BudiGenieEndpoints {
 ## 风险评估
 
 ### 技术风险
+
 - **低风险**：基于现有稳定的 AI 基础设施
 - **兼容性**：新功能完全独立，不影响现有系统
 
 ### 复杂度风险
+
 - **可控**：遵循 Linus 原则，保持简单明了
 - **扩展性**：设计允许逐步增加功能
 
@@ -193,8 +217,8 @@ export interface BudiGenieEndpoints {
 这个 Budi-Genie 原型按照 Linus 的"好品味"原则设计：
 
 1. **数据结构清晰** - 统一的推荐和交互模型
-2. **没有特殊情况** - 简单的状态机和规则引擎  
+2. **没有特殊情况** - 简单的状态机和规则引擎
 3. **实用主义** - 解决真实开发痛点，不追求理论完美
 4. **零破坏性** - 完全向后兼容
 
-**最重要的是**：这不是一个玩具 demo，而是一个可以立即提升 Budibase 开发体验的实用工具。 
+**最重要的是**：这不是一个玩具 demo，而是一个可以立即提升 Budibase 开发体验的实用工具。

@@ -56,7 +56,9 @@ export interface BudiGenieEndpoints {
   ) => Promise<void>
 }
 
-export const buildBudiGenieEndpoints = (API: BaseAPIClient): BudiGenieEndpoints => ({
+export const buildBudiGenieEndpoints = (
+  API: BaseAPIClient
+): BudiGenieEndpoints => ({
   budiGenieChat: async (request: BudiGenieRequest) => {
     return await API.post({
       url: "/api/budi-genie/chat",
@@ -121,4 +123,4 @@ export const buildBudiGenieEndpoints = (API: BaseAPIClient): BudiGenieEndpoints 
       }
     }
   },
-}) 
+})
